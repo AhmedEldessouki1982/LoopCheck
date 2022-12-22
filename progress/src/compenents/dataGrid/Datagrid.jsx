@@ -44,7 +44,7 @@ export default function Datagrid() {
 
 ];
 
-const rows = signals.map(
+const rows = signals.sort((a,b)=>a.id-b.id).map(
    signal => (
     {
         id: signal.id,
@@ -52,7 +52,7 @@ const rows = signals.map(
         Description: signal.Description,
         SignalType: signal.SignalType,
         status: signal.status,
-        
+        date: signal.date,
     }
    )
 )
@@ -66,7 +66,7 @@ const rows = signals.map(
         pageSize={8}
         rowsPerPageOptions={[8]}
         checkboxSelection
-        onSelectionModelChange = {item => (console.log(item))}    
+        onSelectionModelChange = {item => usedContext.dispatch({type:"SIGNAL_CHECKED",checked: item[item.length-1]})} 
         />
     </Box>
   )   

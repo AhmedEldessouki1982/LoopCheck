@@ -1,6 +1,7 @@
 import './App.css';
 import RenderLineChart from './compenents/chart/RenderLineChart';
 import Datagrid from './compenents/dataGrid/Datagrid';
+import Piechart from './compenents/piechart/Piechart'
 import TopBar from './compenents/topbar/TopBar';
 
 //import MUI theme
@@ -18,6 +19,10 @@ export default function App() {
           <Box sx={{display:"flex", gap:"10px"}}> 
             <RenderLineChart /> 
             <Datagrid />
+          </Box>
+          
+          <Box sx={{display:"flex", gap:"10px"}}>
+            <Piechart />
           </Box>
         </ThemeProvider>
       </ColorModeContext.Provider>
