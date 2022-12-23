@@ -66,7 +66,8 @@ const rows = signals.sort((a,b)=>a.id-b.id).map(
         pageSize={8}
         rowsPerPageOptions={[8]}
         checkboxSelection
-        onSelectionModelChange = {item => usedContext.dispatch({type:"SIGNAL_CHECKED",checked: item[item.length-1]})} 
+        onSelectionModelChange = {item => usedContext.dispatch({type:"SIGNAL_CHECKED",checked: item[item.length-1]})}
+        
         />
     </Box>
   )   

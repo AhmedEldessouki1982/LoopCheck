@@ -9,13 +9,14 @@ let initSignalList = {
     ...signals,
 }
 let reducer = (signalList, action) => {
-    console.log(action.checked)
+    console.log(action.ID)
     switch (action.type) {
         case "SIGNAL_CHECKED":            
             return action.checked ?{IOList:[...signalList.IOList.slice(0,action.checked-1),
                 ...signalList.IOList.slice(action.checked, signalList.IOList.length+1),
                 {...signalList.IOList[action.checked-1], date: toDay }]}:
                 {...signalList}
+       
               
         default:
             throw new Error();
