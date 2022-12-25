@@ -1,9 +1,12 @@
 import React from 'react'
-import { Box, useTheme } from '@mui/material';
+import { Box, Button, useTheme } from '@mui/material';
 import { tokens } from '../theme/theme';
 import { DataGrid } from '@mui/x-data-grid';
-import {Context} from '../context/DataContext'
+import {Context} from '../context/DataContext';
+//mui icons
+import LoopIcon from '@mui/icons-material/Loop';
 
+let selectedIDsArr = [];
 
 export default function Datagrid() {
   const theme = useTheme();
@@ -66,9 +69,19 @@ const rows = signals.sort((a,b)=>a.id-b.id).map(
         pageSize={8}
         rowsPerPageOptions={[8]}
         checkboxSelection
-        onSelectionModelChange = {item => usedContext.dispatch({type:"SIGNAL_CHECKED",checked: item[item.length-1]})}
-        
+        onSelectionModelChange = {
+          item => {
+            usedContext.dispatch({type:"SIGNAL_CHECKED",IDselectedToday: item ,checked: item[item.length-1]});
+            selectedIDsArr = [...item]
+          }
+        }
         />
+        <Button 
+        sx={{p:0,lineHeight:1 ,width:30, display:"flex", alignItems:"flex-start", cursor: "pointer",color: colors.greenAccent[400]}}
+        onClick = {()=>usedContext.dispatch({type: "REFRESH_TREND",IDselectedToday: selectedIDsArr})}
+        >
+          <LoopIcon />Refresh Trend
+        </Button>
     </Box>
   )   
 }

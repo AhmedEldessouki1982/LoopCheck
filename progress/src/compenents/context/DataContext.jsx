@@ -7,17 +7,19 @@ let signals = IOList;
 export const Context = React.createContext();
 let initSignalList = {
     ...signals,
+    dailyStatus: {},
 }
 let reducer = (signalList, action) => {
-    console.log(action.ID)
     switch (action.type) {
         case "SIGNAL_CHECKED":            
             return action.checked ?{IOList:[...signalList.IOList.slice(0,action.checked-1),
                 ...signalList.IOList.slice(action.checked, signalList.IOList.length+1),
-                {...signalList.IOList[action.checked-1], date: toDay }]}:
+                {...signalList.IOList[action.checked-1], 
+                    date: !signalList.IOList[action.checked-1].status? toDay : "",
+                    status: !signalList.IOList[action.checked-1].status }]}:
                 {...signalList}
-       
-              
+        case "REFRESH_TREND":
+            return {...signalList,dailyStatus:{...signalList.dailyStatus, [toDay]:action.IDselectedToday.length}}        
         default:
             throw new Error();
     }
@@ -29,7 +31,6 @@ export default function DataContext(props) {
         signalList,
         dispatch
     };
-    
   return (
     <Context.Provider value={globalState}>{props.children}</Context.Provider>
   )
