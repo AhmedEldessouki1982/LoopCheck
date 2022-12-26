@@ -1,48 +1,28 @@
 import React from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { Box, useTheme } from '@mui/material';
+import { tokens } from '../theme/theme';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
-const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
-];
+export default function Piechart ({progress}) {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-  return (
-    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
-
-export default function Piechart() {
-  
+    let value = (progress/12402)*100;
+    let minval = 0;
+    let maxVal = 100;
     return (
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart width={400} height={400}>
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={renderCustomizedLabel}
-            outerRadius={80}
-            fill="#8884d8"
-            dataKey="value"
-          >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
-    );
-  }
+
+      <Box sx={{display:"flex",flexDirection:"column",justifyContent: "center", alignItems:"center", height:150, width:90, color:"black", }}>
+        <CircularProgressbar
+          value = {value}
+          minValue = {minval}
+          maxValue = {maxVal}
+          strokeWidth = {13}
+          background = {false}
+          text = {progress}
+        />
+        <Box sx={{fontSize:20, color: colors.blueAccent[500]}}>{value.toFixed(2)}%</Box>
+      </Box>
+    )
+}
