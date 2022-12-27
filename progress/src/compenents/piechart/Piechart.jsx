@@ -12,7 +12,6 @@ export default function Piechart ({progress}) {
     let minval = 0;
     let maxVal = 100;
     return (
-
       <Box sx={{display:"flex",flexDirection:"column",justifyContent: "center", alignItems:"center", height:150, width:90, color:"black", }}>
         <CircularProgressbar
           value = {value}

@@ -7,7 +7,12 @@ let signals = IOList;
 export const Context = React.createContext();
 let initSignalList = {
     ...signals,
-    dailyStatus: {},
+    dailyStatus: {
+        "26/12/2022": 100,
+        "25/12/2022": 35,
+        "24/12/2022": 108,
+        "23/12/2022": 60,
+    },
 }
 let reducer = (signalList, action) => {
     switch (action.type) {
@@ -16,8 +21,8 @@ let reducer = (signalList, action) => {
                 ...signalList.IOList.slice(action.checked, signalList.IOList.length+1),
                 {...signalList.IOList[action.checked-1], 
                     date: !signalList.IOList[action.checked-1].status? toDay : "",
-                    status: !signalList.IOList[action.checked-1].status }]}:
-                {...signalList}
+                    status: !signalList.IOList[action.checked-1].status}], dailyStatus: {...signalList.dailyStatus}}:
+                {...signalList, ...signalList.dailyStatus}
         case "REFRESH_TREND":
             return {...signalList,dailyStatus:{...signalList.dailyStatus, [toDay]:action.IDselectedToday.length}}        
         default:
@@ -31,6 +36,7 @@ export default function DataContext(props) {
         signalList,
         dispatch
     };
+
   return (
     <Context.Provider value={globalState}>{props.children}</Context.Provider>
   )
