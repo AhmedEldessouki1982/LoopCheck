@@ -1,7 +1,8 @@
 import React from 'react';
 import IOList from '../../utils/signals.json';
 import TimeandDates from '../../utils/TimeandDate.js'
-let toDay = TimeandDates(1)
+let toDay = TimeandDates(1);
+
 let signals = IOList;
 
 export const Context = React.createContext();
