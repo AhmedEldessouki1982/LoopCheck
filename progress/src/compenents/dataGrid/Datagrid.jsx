@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
+import {Context} from '../context/DataContext';
 import { Box, Button, useTheme } from '@mui/material';
 import { tokens } from '../theme/theme';
 import { DataGrid } from '@mui/x-data-grid';
-import {Context} from '../context/DataContext';
 //mui icons
 import LoopIcon from '@mui/icons-material/Loop';
 
@@ -11,8 +11,9 @@ let selectedIDsArr = [];
 export default function Datagrid() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  //context api
   let usedContext = React.useContext(Context);
-  let signals = usedContext.signalList.IOList;
+  let signals = usedContext.signalList.IOList.IOList[0].IOList;
 
   const columns = [
   { field: 'id', headerName: 'id', width: 5 },
@@ -47,7 +48,7 @@ export default function Datagrid() {
 
 ];
 
-const rows = signals.sort((a,b)=>a.id-b.id).map(
+const rows = signals.length > 1 && !usedContext.signalList.loading && signals.sort((a,b)=>a.id-b.id).map(
    signal => (
     {
         id: signal.id,

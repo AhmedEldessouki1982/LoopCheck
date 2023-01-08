@@ -6,7 +6,6 @@ import { createBrowserRouter, RouterProvider} from "react-router-dom";
 import DataContext from './compenents/context/DataContext';
 import Register from './compenents/Register/Register';
 
-
 const appRouter = createBrowserRouter ([
   {
     path: "/",
@@ -17,7 +16,6 @@ const appRouter = createBrowserRouter ([
     element: <Register />
   }
 ])
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
