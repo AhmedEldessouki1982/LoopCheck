@@ -7,12 +7,12 @@ export let GetDataAPI = async (dispatch) => {
         }
     )
     await axios.get(url).then(
-        res => (dispatch(
+        res => dispatch(
             {
                 type: "DATA_SUCCESS",
-                data: res.data,
+                data: res.data.IOList[0].IOList,
             }
-        ))
+        )
     ).catch (
             err => (
                 dispatch(

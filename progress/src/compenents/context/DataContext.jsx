@@ -1,5 +1,4 @@
 import React from 'react';
-// import IOList from '../../utils/signals.json';
 import TimeandDates from '../../utils/TimeandDate.js';
 export const Context = React.createContext();
 
@@ -24,7 +23,7 @@ let reducer = (signalList, action) => {
         case "DATA_SUCCESS":
             return {...signalList, loading:false, IOList: action.data, dailyStatus: {}}
         case "SIGNAL_CHECKED":            
-            return action.checked ?{IOList:[...signalList.IOList.slice(0,action.checked-1),
+            return action.checked ?{loading:false, IOList:[...signalList.IOList.slice(0,action.checked-1),
                 ...signalList.IOList.slice(action.checked, signalList.IOList.length+1),
                 {...signalList.IOList[action.checked-1], 
                     date: !signalList.IOList[action.checked-1].status? toDay : "",

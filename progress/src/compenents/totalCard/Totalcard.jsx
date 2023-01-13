@@ -11,7 +11,7 @@ import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined
 
 export default function Totalcard() {
   let usedContext = React.useContext(Context);
-  let signals = usedContext.signalList.IOList.IOList[0].IOList;
+  let signals = usedContext.signalList.IOList;
   let trendStatus = true;
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -22,7 +22,7 @@ export default function Totalcard() {
         <Box sx={{alignSelf: "center", flex:2, color: colors.primary[100], ml: 3}}>
           Total Progress
         </Box>
-        <Piechart progress = {usedContext.signalList.loading && signals.filter(({status})=> status).length}/> 
+        <Piechart progress = {!usedContext.signalList.loading && signals.filter(({status})=> status).length}/> 
         {
           !trendStatus ? <Box sx={{flex:2 }}><ArrowDropDownOutlinedIcon sx={{fontSize: 70, color: "red"}}/></Box>
           :<Box sx={{flex:2 }}><ArrowDropUpOutlinedIcon sx={{fontSize: 70, color: "green"}}/></Box>

@@ -13,7 +13,9 @@ export default function Datagrid() {
   const colors = tokens(theme.palette.mode);
   //context api
   let usedContext = React.useContext(Context);
-  let signals = usedContext.signalList.IOList.IOList[0].IOList;
+  let signals = usedContext.signalList.IOList;
+
+  // console.log(signals);
 
   const columns = [
   { field: 'id', headerName: 'id', width: 5 },
