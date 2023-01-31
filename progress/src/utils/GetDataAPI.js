@@ -1,12 +1,13 @@
 import axios from 'axios';
-const url = "http://localhost:8000/api/v1/signals";
+const url_ioList = "http://localhost:8000/api/v1/signals";
+
 export let GetDataAPI = async (dispatch) => {
     dispatch(
         {
             type: "DATA_LOADING"
         }
     )
-    await axios.get(url).then(
+    await axios.get(url_ioList).then(
         res => dispatch(
             {
                 type: "DATA_SUCCESS",

@@ -4,6 +4,8 @@ import * as dotenv from 'dotenv';
 import connect from './db/connect.js';
 import { usersRouter } from './routes/users.js';
 import { IOListRouter } from './routes/IOList.js';
+import { dailyProgressRouter } from './routes/dailyProgress.js';
+
 dotenv.config();
 
 const app = new express();
@@ -28,6 +30,12 @@ app.use (
 app.use (
     "/api/v1/signals",
     IOListRouter
+)
+
+//middleware for daily progress dates api
+app.use (
+    "/api/v1/progress",
+    dailyProgressRouter
 )
 
 

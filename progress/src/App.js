@@ -12,6 +12,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 //context
 import {Context} from '../src/compenents/context/DataContext';
 import { GetDataAPI } from './utils/GetDataAPI';
+import { GetProgressAPI } from './utils/GetProgressAPI';
+
 
 export default function App() {
   let [theme, colorMode] = useMode();
@@ -21,7 +23,8 @@ export default function App() {
 
   React.useEffect(
     () => {
-      GetDataAPI(dispatch)
+      GetDataAPI(dispatch);
+      GetProgressAPI(dispatch);
     },[]
   )
   
